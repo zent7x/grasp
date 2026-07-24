@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="826" height="206" viewBox="0 0 826 206">
+  <rect x="0.5" y="0.5" width="825" height="205" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <path d="M0.5 10.5 a10 10 0 0 1 10 -10 h805 a10 10 0 0 1 10 10 v30 h-825 z" fill="#161b22"/>
+  <circle cx="20" cy="20" r="6" fill="#ff5f56"/><circle cx="40" cy="20" r="6" fill="#ffbd2e"/><circle cx="60" cy="20" r="6" fill="#27c93f"/>
+  <text x="413" y="24" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" fill="#8b949e" text-anchor="middle">grasp · relevance over noise</text>
+  <text x="22" y="62" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">grasp ask "useReducer dispatch action reducer hook" --top 3</tspan></text>
+  <text x="22" y="86" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#79c0ff">packages/react-reconciler/src/ReactFiberHooks.js</tspan><tspan fill="#8b949e">:L1287-1299</tspan><tspan fill="#d2a8ff"> [dispatch]</tspan><tspan fill="#6e7681">  39.98</tspan><tspan fill="#3fb950">   ← real source</tspan></text>
+  <text x="22" y="110" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#79c0ff">packages/react-reconciler/src/ReactFiberHooks.js</tspan><tspan fill="#8b949e">:L1941-1965</tspan><tspan fill="#d2a8ff"> [dispatch]</tspan><tspan fill="#6e7681">  38.69</tspan></text>
+  <text x="22" y="134" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#adbac7"></tspan></text>
+  <text x="22" y="158" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">grasp ask "… same query …" --tests</tspan><tspan fill="#6e7681">   # test files no longer demoted</tspan></text>
+  <text x="22" y="182" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#8b949e">packages/eslint-plugin-react-hooks/</tspan><tspan fill="#f0883e">__tests__</tspan><tspan fill="#8b949e">/ESLintRuleExhaustiveDeps-test.js</tspan><tspan fill="#6e7681">  42.43</tspan></text>
+</svg>

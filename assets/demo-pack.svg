@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="658" height="398" viewBox="0 0 658 398">
+  <rect x="0.5" y="0.5" width="657" height="397" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <path d="M0.5 10.5 a10 10 0 0 1 10 -10 h637 a10 10 0 0 1 10 10 v30 h-657 z" fill="#161b22"/>
+  <circle cx="20" cy="20" r="6" fill="#ff5f56"/><circle cx="40" cy="20" r="6" fill="#ffbd2e"/><circle cx="60" cy="20" r="6" fill="#27c93f"/>
+  <text x="329" y="24" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" fill="#8b949e" text-anchor="middle">grasp pack · facebook/react</text>
+  <text x="22" y="62" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">grasp pack "hydration mismatch error during server render" --budget 600</tspan></text>
+  <text x="22" y="86" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#f0883e"># grasp pack: hydration mismatch error during server render</tspan></text>
+  <text x="22" y="110" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#8b949e">  3 chunk(s) from 2 file(s), ~590 tokens (budget 600)</tspan></text>
+  <text x="22" y="134" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#adbac7"></tspan></text>
+  <text x="22" y="158" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#f0883e">## packages/react-reconciler/src/ReactFiberHydrationContext.js</tspan></text>
+  <text x="22" y="182" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#8b949e">```js</tspan></text>
+  <text x="22" y="206" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#6e7681">// ReactFiberHydrationContext.js:383-387</tspan></text>
+  <text x="22" y="230" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#a5d6ff">export const HydrationMismatchException: mixed = new Error(</tspan></text>
+  <text x="22" y="254" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#a5d6ff">  'Hydration Mismatch Exception: This is not a real error, and should</tspan></text>
+  <text x="22" y="278" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#a5d6ff">   not leak into userspace. If you see this, it is a bug in React.',</tspan></text>
+  <text x="22" y="302" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#a5d6ff">);</tspan></text>
+  <text x="22" y="326" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#8b949e">```</tspan></text>
+  <text x="22" y="350" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#adbac7"></tspan></text>
+  <text x="22" y="374" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">packed 590 tokens (budget 600) — 3 chunk(s) included, 8 file(s) trimmed</tspan></text>
+</svg>

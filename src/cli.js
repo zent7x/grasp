@@ -33,9 +33,10 @@ Give any AI coding agent a grasp on a codebase too big to fit in its context win
 
 Usage:
   grasp index [path]                    Build (or rebuild) the index for a repo.
-  grasp ask <task...> [--top N] [--json]
+  grasp ask <task...> [--top N] [--json] [--tests]
                                          Rank the codebase against a task description.
-  grasp pack <task...> [--budget N] [--out FILE]
+                                         (test/fixture files are demoted by default; --tests includes them)
+  grasp pack <task...> [--budget N] [--out FILE] [--tests]
                                          Pack the most relevant code for a task into a bundle.
   grasp outline [path]                  Show a symbol outline (whole repo, or one file/dir).
   grasp stats                           Print index summary statistics.
@@ -106,7 +107,7 @@ async function runIndex(rest) {
 async function runAsk(rest) {
   const { positional, flags } = parseArgs(rest, {
     valueFlags: ['--top'],
-    boolFlags: ['--json'],
+    boolFlags: ['--json', '--tests'],
   });
   if (positional.length === 0) {
     throw new Error('ask requires a task, e.g. `grasp ask "add auth to login route"`');
@@ -116,7 +117,7 @@ async function runAsk(rest) {
   const config = await loadConfig(root);
   const top = flags.top !== undefined ? Number(flags.top) : config.top;
 
-  const { results } = await query(root, task, { top });
+  const { results } = await query(root, task, { top, includeTests: flags.tests === true });
 
   if (flags.json) {
     console.log(JSON.stringify(results, null, 2));
@@ -131,6 +132,7 @@ async function runAsk(rest) {
 async function runPack(rest) {
   const { positional, flags } = parseArgs(rest, {
     valueFlags: ['--budget', '--out'],
+    boolFlags: ['--tests'],
   });
   if (positional.length === 0) {
     throw new Error('pack requires a task, e.g. `grasp pack "add auth to login route"`');
@@ -141,7 +143,7 @@ async function runPack(rest) {
   const config = await loadConfig(root);
   const budget = flags.budget !== undefined ? Number(flags.budget) : config.budget;
 
-  const result = await pack(index, root, task, { budget });
+  const result = await pack(index, root, task, { budget, includeTests: flags.tests === true });
 
   if (flags.out) {
     const outPath = path.resolve(process.cwd(), flags.out);

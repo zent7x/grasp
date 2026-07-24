@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="884" height="254" viewBox="0 0 884 254">
+  <rect x="0.5" y="0.5" width="883" height="253" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <path d="M0.5 10.5 a10 10 0 0 1 10 -10 h863 a10 10 0 0 1 10 10 v30 h-883 z" fill="#161b22"/>
+  <circle cx="20" cy="20" r="6" fill="#ff5f56"/><circle cx="40" cy="20" r="6" fill="#ffbd2e"/><circle cx="60" cy="20" r="6" fill="#27c93f"/>
+  <text x="442" y="24" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="12" fill="#8b949e" text-anchor="middle">grasp · facebook/react</text>
+  <text x="22" y="62" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">grasp index</tspan><tspan fill="#6e7681">   # indexes facebook/react — 7,226 files</tspan></text>
+  <text x="22" y="86" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">indexed 7226 files, 88854 chunks → .grasp/index.json    (14.5s)</tspan></text>
+  <text x="22" y="110" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#adbac7"></tspan></text>
+  <text x="22" y="134" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">grasp ask "schedule work by lane priority" --top 4</tspan></text>
+  <text x="22" y="158" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#79c0ff">packages/react-reconciler/src/ReactEventPriorities.js</tspan><tspan fill="#8b949e">:L56-68</tspan><tspan fill="#d2a8ff"> [lane]</tspan><tspan fill="#6e7681">  25.55</tspan></text>
+  <text x="22" y="182" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#79c0ff">packages/react-reconciler/src/ReactFiberLane.js</tspan><tspan fill="#8b949e">:L810-817</tspan><tspan fill="#d2a8ff"> [higherPriorityLane]</tspan><tspan fill="#6e7681">  24.37</tspan></text>
+  <text x="22" y="206" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#79c0ff">packages/react-reconciler/src/ReactFiberBeginWork.js</tspan><tspan fill="#8b949e">:L1616-1618</tspan><tspan fill="#d2a8ff"> [lane]</tspan><tspan fill="#6e7681">  23.43</tspan></text>
+  <text x="22" y="230" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" font-size="14" xml:space="preserve"><tspan fill="#79c0ff">packages/react-reconciler/src/ReactFiberLane.js</tspan><tspan fill="#8b949e">:L391-411</tspan><tspan fill="#d2a8ff"> [unblockedLanesWithMatchingPriority]</tspan><tspan fill="#6e7681">  23.42</tspan></text>
+</svg>

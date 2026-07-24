@@ -16,6 +16,30 @@ const GRAPH_BOOST = 0.5;
 const GRAPH_SEED_COUNT = 10;
 const DEFAULT_TOP = 20;
 
+// Source-priority demotion. On a real repo, test/fixture/snapshot/example
+// files repeat query terms far more than the actual implementation, so raw
+// BM25 buries real source under noise. As a final re-rank we multiply the
+// score of files whose path looks generated/non-source by TEST_DEMOTION, so
+// the implementation outranks the files that merely mention it. Opt out with
+// opts.includeTests (CLI: --tests) to search everything at full weight.
+const TEST_DEMOTION = 0.2;
+// A path segment that marks a non-source tree.
+const DIR_DEMOTE_RE = /(^|\/)(__tests__|__mocks__|__snapshots__|__fixtures__|tests?|fixtures?|e2e|examples?|docs|node_modules|benchmarks?)(\/)/i;
+// A filename suffix that marks a test/snapshot/fixture file.
+const FILE_DEMOTE_RE = /\.(test|spec|stories)\.[cm]?[jt]sx?$|\.snap$|\.expect\.md$/i;
+// A whole word in the basename that marks non-source (word-bounded so
+// "attestation.js" / "constitution.ts" are NOT demoted).
+const BASENAME_WORD_RE = /(^|[^a-z0-9])(tests?|specs?|fixtures?|mocks?|benchmarks?|examples?|stories|e2e)([^a-z0-9]|$)/i;
+
+/** Ranking multiplier: 1 for real source, TEST_DEMOTION for test/fixture/etc. */
+export function sourcePriority(file) {
+  const base = file.slice(file.lastIndexOf('/') + 1);
+  if (DIR_DEMOTE_RE.test(file) || FILE_DEMOTE_RE.test(file) || BASENAME_WORD_RE.test(base)) {
+    return TEST_DEMOTION;
+  }
+  return 1;
+}
+
 /**
  * Rank the chunks in `index` against `task`.
  *
@@ -100,6 +124,20 @@ export function rank(index, task, opts = {}) {
       // sets it falls into.
       scores.set(id, scores.get(id) + GRAPH_BOOST);
       reasons.get(id).push(`graph:${basename(source)}`);
+    }
+  }
+
+  // --- Source-priority demotion (final re-rank) ---------------------------
+  // Applied after boosts so seed selection above still uses raw relevance;
+  // real-source files (multiplier 1) keep their exact score, and only
+  // test/fixture/generated files are pushed down.
+  if (!opts.includeTests) {
+    for (const id of scores.keys()) {
+      const p = sourcePriority(chunkMeta[id].file);
+      if (p !== 1) {
+        scores.set(id, scores.get(id) * p);
+        reasons.get(id).push(`demoted:${p}`);
+      }
     }
   }
 

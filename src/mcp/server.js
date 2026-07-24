@@ -270,5 +270,12 @@ function send(output, msg, onError) {
 }
 
 function logError(message, err) {
-  process.stderr.write(`grasp mcp: ${message}: ${err?.stack || err?.message || String(err)}\n`);
+  // Guard the write itself: during a client disconnect stderr may also be a
+  // broken pipe, and an unguarded write here would throw from inside an error
+  // handler and crash the process — the exact thing this server must not do.
+  try {
+    process.stderr.write(`grasp mcp: ${message}: ${err?.stack || err?.message || String(err)}\n`);
+  } catch {
+    // Nothing more we can do if even stderr is gone.
+  }
 }
