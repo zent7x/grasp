@@ -1,0 +1,6 @@
+node_modules/
+.grasp/
+*.log
+.DS_Store
+coverage/
+*.tmp

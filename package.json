@@ -1,0 +1,42 @@
+{
+  "name": "@zent7x/grasp",
+  "version": "0.1.0",
+  "description": "Give any AI coding agent a grasp on a codebase too big to fit in its context window.",
+  "type": "module",
+  "bin": {
+    "grasp": "bin/grasp.js"
+  },
+  "exports": "./src/index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node bin/grasp.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "author": "Adeeb Bashir",
+  "files": [
+    "src",
+    "bin",
+    "SPEC.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "agentic",
+    "llm",
+    "context",
+    "context-window",
+    "codebase",
+    "monorepo",
+    "mcp",
+    "code-search",
+    "retrieval",
+    "claude",
+    "cursor",
+    "codex"
+  ]
+}
