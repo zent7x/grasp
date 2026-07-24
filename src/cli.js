@@ -22,6 +22,8 @@ import { loadIndex } from './store.js';
 import { loadConfig } from './config.js';
 import { toPosix } from './util.js';
 import { startServer } from './mcp/server.js';
+import { stylerFor } from './color.js';
+import { startTui } from './tui.js';
 
 const VERSION = '0.1.0';
 
@@ -40,9 +42,12 @@ Usage:
                                          Pack the most relevant code for a task into a bundle.
   grasp outline [path]                  Show a symbol outline (whole repo, or one file/dir).
   grasp stats                           Print index summary statistics.
+  grasp tui [--top N]                   Interactive search shell: query, open results, pack.
   grasp serve                           Start the MCP server (newline-delimited JSON-RPC over stdio).
   grasp help                            Show this help.
   grasp version                         Print the version number.
+
+Output is colorized on a TTY; set NO_COLOR=1 to disable.
 `;
 
 /**
@@ -75,15 +80,14 @@ function parseArgs(rest, spec = {}) {
   return { positional, flags };
 }
 
-function formatLoc(file, startLine, endLine) {
-  return `${file}:L${startLine}-${endLine}`;
-}
-
-function formatResultLine(r) {
-  const loc = formatLoc(r.file, r.startLine, r.endLine);
-  const symbolPart = r.symbol ? ` [${r.symbol}]` : '';
-  const score = typeof r.score === 'number' ? r.score.toFixed(2) : r.score;
-  return `${loc}${symbolPart} ${score}`;
+function formatResultLine(r, c) {
+  const path = c.cyan(r.file);
+  const loc = c.dim(`:L${r.startLine}-${r.endLine}`);
+  const symbolPart = r.symbol ? ` ${c.magenta(`[${r.symbol}]`)}` : '';
+  const score = typeof r.score === 'number' ? r.score.toFixed(2) : String(r.score);
+  // With colors disabled every styler is the identity function, so this is
+  // byte-for-byte `file:Lstart-end [symbol] score` — the pipe/test format.
+  return `${path}${loc}${symbolPart} ${c.dim(score)}`;
 }
 
 async function requireIndex(root) {
@@ -99,8 +103,9 @@ async function runIndex(rest) {
   const root = positional[0] ? path.resolve(process.cwd(), positional[0]) : process.cwd();
   const config = await loadConfig(root);
   const index = await buildIndex(root, config);
+  const c = stylerFor(process.stdout);
   console.log(
-    `indexed ${index.fileCount} files, ${index.chunkCount} chunks → .grasp/index.json`
+    `indexed ${c.green(String(index.fileCount))} files, ${c.green(String(index.chunkCount))} chunks → ${c.dim('.grasp/index.json')}`
   );
 }
 
@@ -124,8 +129,9 @@ async function runAsk(rest) {
     return;
   }
 
+  const c = stylerFor(process.stdout);
   for (const r of results) {
-    console.log(formatResultLine(r));
+    console.log(formatResultLine(r, c));
   }
 }
 
@@ -190,12 +196,20 @@ async function runStats(rest) {
     (a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)
   );
 
-  console.log(`files: ${index.fileCount}`);
-  console.log(`chunks: ${index.chunkCount}`);
-  console.log('languages:');
+  const c = stylerFor(process.stdout);
+  console.log(`${c.dim('files:')} ${c.yellow(String(index.fileCount))}`);
+  console.log(`${c.dim('chunks:')} ${c.yellow(String(index.chunkCount))}`);
+  console.log(`${c.dim('languages:')}`);
   for (const [lang, count] of sortedLangs) {
-    console.log(`  ${lang}: ${count}`);
+    console.log(`  ${c.cyan(lang)}: ${count}`);
   }
+}
+
+async function runTui(rest) {
+  const { flags } = parseArgs(rest, { valueFlags: ['--top'] });
+  const root = process.cwd();
+  const top = flags.top !== undefined ? Number(flags.top) : undefined;
+  await startTui({ root, top });
 }
 
 async function runServe() {
@@ -243,6 +257,9 @@ export async function run(argv) {
         break;
       case 'serve':
         await runServe(rest);
+        break;
+      case 'tui':
+        await runTui(rest);
         break;
       default:
         throw new Error(`unknown command: "${cmd}"\n\n${USAGE}`);

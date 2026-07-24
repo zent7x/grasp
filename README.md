@@ -69,6 +69,16 @@ grasp stats
 
 File count, chunk count, and a language breakdown for the current index.
 
+### Interactive mode
+
+```sh
+grasp tui
+```
+
+An interactive search shell. Type a query to rank the codebase, a result number to open that chunk's source inline, `p <query>` to pack the top results, and `q` to quit. Output is colorized on a TTY (set `NO_COLOR=1` to turn it off; `ask`, `stats`, and `index` colorize too).
+
+![grasp tui on facebook/react](assets/demo-tui.svg)
+
 ## MCP
 
 Start the server with `grasp serve` from the repo root; it builds the index on first launch if one doesn't already exist, then speaks newline-delimited JSON-RPC 2.0 over stdio. A typical client config:
