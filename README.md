@@ -127,3 +127,7 @@ const bundle = await pack(index, root, 'trace the login flow', { budget: 8000 })
 ## License
 
 MIT
+
+---
+
+Built by Adeeb Bashir (zentex) · [zent7x.com](https://zent7x.com)
